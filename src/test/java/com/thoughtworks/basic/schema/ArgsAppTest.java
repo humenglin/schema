@@ -125,11 +125,20 @@ public class ArgsAppTest {
     }
 
     @Test(expected = NoSuchFlagException.class)
-    public void should_throw_no_such_flag_exception_when_parse_args_given_a_args_app_and_only_has_flag() {
+    public void should_throw_no_such_flag_exception_when_parse_args_given_a_args_app_and_error_flag() {
         Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
         ArgsApp argsApp = new ArgsApp(schema);
 
         String args = "-l-p true -p 8080 -d /usr/logs";
+        argsApp.parse(args);
+    }
+
+    @Test(expected = NoSuchFlagException.class)
+    public void should_throw_no_such_flag_exception_when_parse_args_given_a_args_app_and_no_flag() {
+        Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
+        ArgsApp argsApp = new ArgsApp(schema);
+
+        String args = "- true";
         argsApp.parse(args);
     }
 }
