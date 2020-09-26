@@ -13,4 +13,7 @@ public class ArgsApp {
         return args.getValueOf(flag);
     }
 
+    public void parse(String args) {
+        this.args = new Args(args, schema);
+    }
 }

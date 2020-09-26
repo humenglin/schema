@@ -28,4 +28,21 @@ public class ArgsAppTest {
 
         argsApp.getValueOf("q");
     }
+
+    @Test
+    public void should_return_flag_value_when_parse_args_given_a_args_app() {
+        Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
+        ArgsApp argsApp = new ArgsApp(schema);
+
+        String args = "-l true -p 8080 -d /usr/logs";
+        argsApp.parse(args);
+
+        Object lValue = argsApp.getValueOf("l");
+        Object pValue = argsApp.getValueOf("p");
+        Object dValue = argsApp.getValueOf("d");
+
+        Assert.assertEquals(true, lValue);
+        Assert.assertEquals(8080, pValue);
+        Assert.assertEquals("/usr/logs", dValue);
+    }
 }
