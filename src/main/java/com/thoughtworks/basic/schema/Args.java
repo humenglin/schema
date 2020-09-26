@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Args {
     private Schema schema;
@@ -54,7 +55,8 @@ public class Args {
     }
 
     private List<String> spiltToArgs(String args) {
-        return Arrays.asList(args.trim().split(CONSTANTS.FLAG_SPILT));
+        List<String> argsList = Arrays.asList(args.trim().split(CONSTANTS.FLAG_SPILT));
+        return new ArrayList<>(argsList).stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
     }
 
     public Object getValueOf(String flag) {
@@ -69,6 +71,7 @@ public class Args {
                 continue;
             }
         }
-        throw new NoSuchFlagException();
+
+        return FlagSchemaFactory.getOf(flag).getDefaultValue();
     }
 }

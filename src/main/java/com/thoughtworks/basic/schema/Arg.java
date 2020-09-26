@@ -3,6 +3,7 @@ package com.thoughtworks.basic.schema;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Arg {
     private String flag;
@@ -16,10 +17,11 @@ public class Arg {
 
     private void parseValue(String argPair) {
         List<String> argPairList = Arrays.asList(argPair.trim().split(CONSTANTS.SPILT_FLAG_AND_VALUE));
-        List<String> argValue = new ArrayList<>(argPairList.subList(1, argPairList.size()));
+        List<String> argPairItems = new ArrayList<>(argPairList).stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
+        List<String> argValue = new ArrayList<>(argPairItems.subList(1, argPairItems.size()));
         if (isArgValid(argValue)) {
-            this.flag = argPairList.get(0);
-            this.value = argPairList.get(1);
+            this.flag = argPairItems.get(0);
+            this.value = argPairItems.get(1);
         }
     }
 

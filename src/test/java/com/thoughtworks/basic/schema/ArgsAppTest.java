@@ -45,4 +45,55 @@ public class ArgsAppTest {
         Assert.assertEquals(8080, pValue);
         Assert.assertEquals("/usr/logs", dValue);
     }
+
+    @Test
+    public void should_return_flag_value_when_parse_args_given_a_args_app_and_only_l_flag() {
+        Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
+        ArgsApp argsApp = new ArgsApp(schema);
+
+        String args = " -l  true    ";
+        argsApp.parse(args);
+
+        Object lValue = argsApp.getValueOf("l");
+        Object pValue = argsApp.getValueOf("p");
+        Object dValue = argsApp.getValueOf("d");
+
+        Assert.assertEquals(true, lValue);
+        Assert.assertEquals(0, pValue);
+        Assert.assertEquals("", dValue);
+    }
+
+    @Test
+    public void should_return_flag_value_when_parse_args_given_a_args_app_and_only_p_flag() {
+        Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
+        ArgsApp argsApp = new ArgsApp(schema);
+
+        String args = " -p   8080   ";
+        argsApp.parse(args);
+
+        Object lValue = argsApp.getValueOf("l");
+        Object pValue = argsApp.getValueOf("p");
+        Object dValue = argsApp.getValueOf("d");
+
+        Assert.assertEquals(false, lValue);
+        Assert.assertEquals(8080, pValue);
+        Assert.assertEquals("", dValue);
+    }
+
+    @Test
+    public void should_return_flag_value_when_parse_args_given_a_args_app_and_only_d_flag() {
+        Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
+        ArgsApp argsApp = new ArgsApp(schema);
+
+        String args = "  -d   /usr/logs  ";
+        argsApp.parse(args);
+
+        Object lValue = argsApp.getValueOf("l");
+        Object pValue = argsApp.getValueOf("p");
+        Object dValue = argsApp.getValueOf("d");
+
+        Assert.assertEquals(false, lValue);
+        Assert.assertEquals(0, pValue);
+        Assert.assertEquals("/usr/logs", dValue);
+    }
 }
