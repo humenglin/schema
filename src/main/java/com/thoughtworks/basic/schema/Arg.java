@@ -1,5 +1,7 @@
 package com.thoughtworks.basic.schema;
 
+import com.thoughtworks.basic.schema.exception.IllegalArgException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,7 @@ public class Arg {
 
     private boolean isArgValid(List<String> argValue) {
         if (argValue.size() > 1) {
-            return false;
+            throw new IllegalArgException();
         }
         return true;
     }

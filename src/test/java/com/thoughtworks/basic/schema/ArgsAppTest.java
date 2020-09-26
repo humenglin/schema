@@ -1,5 +1,6 @@
 package com.thoughtworks.basic.schema;
 
+import com.thoughtworks.basic.schema.exception.IllegalArgException;
 import com.thoughtworks.basic.schema.exception.NoSuchFlagException;
 import com.thoughtworks.basic.schema.exception.RepeatFlagException;
 import org.junit.Assert;
@@ -139,6 +140,15 @@ public class ArgsAppTest {
         ArgsApp argsApp = new ArgsApp(schema);
 
         String args = "- true";
+        argsApp.parse(args);
+    }
+
+    @Test(expected = IllegalArgException.class)
+    public void should_throw_Illegal_Arg_exception_when_parse_args_given_a_args_app_and_error_value() {
+        Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
+        ArgsApp argsApp = new ArgsApp(schema);
+
+        String args = "-l tr ue";
         argsApp.parse(args);
     }
 }
