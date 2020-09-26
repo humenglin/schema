@@ -21,7 +21,7 @@ public class Arg {
         List<String> argValue = new ArrayList<>(argPairItems.subList(1, argPairItems.size()));
         if (isArgValid(argValue)) {
             this.flag = argPairItems.get(0);
-            this.value = argPairItems.get(1);
+            this.value = argValue.size() == 1 ? argPairItems.get(1) : flagSchema.getDefaultValue().toString();
         }
     }
 

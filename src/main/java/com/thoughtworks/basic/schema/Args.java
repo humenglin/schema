@@ -1,6 +1,7 @@
 package com.thoughtworks.basic.schema;
 
 import com.thoughtworks.basic.schema.exception.NoSuchFlagException;
+import com.thoughtworks.basic.schema.exception.RepeatFlagException;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class Args {
             FlagSchemaFactory.getOf(flag);
         } catch (NoSuchFlagException e) {
             isStartWithFlag = false;
+            throw e;
         }
         return isStartWithFlag;
 
@@ -48,7 +50,7 @@ public class Args {
     private boolean isFlagDistinct(String flag) {
         for (Arg arg: argPairs) {
             if (arg.getFlag().equals(flag)) {
-                return false;
+                throw new RepeatFlagException();
             }
         }
         return true;
