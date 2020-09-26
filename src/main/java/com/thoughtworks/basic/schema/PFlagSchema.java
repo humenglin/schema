@@ -1,6 +1,6 @@
 package com.thoughtworks.basic.schema;
 
-public class PFlagSchema extends FlagSchema {
+public class PFlagSchema implements FlagSchema {
     private final String flag = CONSTANTS.FLAG_P;
     private final ValueType valueType = ValueType.INTEGER;
 

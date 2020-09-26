@@ -1,12 +1,12 @@
 package com.thoughtworks.basic.schema;
 
-public abstract class FlagSchema {
+public interface FlagSchema {
 
-    public abstract String getFlag();
+    String getFlag();
 
-    public abstract ValueType getValueType();
+    ValueType getValueType();
 
-    public abstract Object getDefaultValue();
+    Object getDefaultValue();
 
-    public abstract Object parseValue(String value);
+    Object parseValue(String value);
 }

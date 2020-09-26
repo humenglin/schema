@@ -1,6 +1,6 @@
 package com.thoughtworks.basic.schema;
 
-public class LFlagSchema extends FlagSchema {
+public class LFlagSchema implements FlagSchema {
     private final String flag = CONSTANTS.FLAG_L;
     private final ValueType valueType = ValueType.BOOLEAN;
 
