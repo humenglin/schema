@@ -11,4 +11,8 @@ public class PFlagSchema extends FlagSchema {
     public ValueType getValueType() {
         return this.valueType;
     }
+
+    public Object getDefaultValue() {
+        return valueType.getDefaultValue();
+    }
 }

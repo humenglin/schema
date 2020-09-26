@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class SchemaTest {
     @Test
-    public void test() {
+    public void should_return_right_flag_schemas_given_init_schema() {
         Schema schema = new Schema(Arrays.asList(new LFlagSchema(), new PFlagSchema(), new DFlagSchema()));
 
         Assert.assertEquals(3, schema.getFlagSchemas().size());
